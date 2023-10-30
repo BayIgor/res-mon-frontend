@@ -3,12 +3,13 @@ import axios from 'axios';
 const BASE_URL = 'http://localhost:8080/';
 
 const AuthService = {
-    signup: (signupRequest) => {
-        return axios.post(BASE_URL + 'signup', signupRequest);
-    },
 
     login: (loginRequest) => {
         return axios.post(BASE_URL + 'authenticate', loginRequest);
+    },
+
+    signup: (signupRequest) => {
+        return axios.post(BASE_URL + 'signup', signupRequest);
     },
 
     hello: () => {
@@ -23,6 +24,10 @@ const AuthService = {
             return Promise.reject('JWT token not found');
         }
     },
+
+    passwordReset: (forgotRequest)=>{
+        return axios.post(BASE_URL + 'forgot_password', forgotRequest)
+    }
 };
 
 export default AuthService;

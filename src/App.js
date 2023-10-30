@@ -1,27 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import SignupComponent from './components/SignUpComponent';
-import LoginComponent from './components/LoginComponent';
-import DashboardComponent from './components/DashboardComponent';
+import React from "react";
+import {Box} from "@mui/material";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
+import SignUpInPage from "./components/auth/SignUpInPage";
+import AuthTitleBox from "./components/auth/AuthTitleBox";
+import MainLayout from "./layouts/MainLayout";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import EmailEnterPage from "./components/passwordRecovery/EmailEnterPage";
+import PasswordTitleBox from "./components/passwordRecovery/PasswordTitleBox";
 
-function App() {
+const App = () => {
     return (
         <Router>
-            <div>
-                <Link to="/signup">
-                    <button type="button">Signup</button>
-                </Link>
-                <Link to="/login">
-                    <button type="button">Login</button>
-                </Link>
-            </div>
-            <Routes>
-                <Route path='/signup' element={<SignupComponent/>} />
-                <Route path='/login' element={<LoginComponent/>} />
-                <Route path='/dashboard' element={<DashboardComponent/>} />
-            </Routes>
+            <MainLayout>
+                <Box
+                    sx={{
+                        width: {
+                            sm: "90vw",
+                            xs: "90vw",
+                            md: "60vw",
+                            lg: "60vw",
+                            xl: "60vw",
+                        },
+                    }}
+                >
+                    <Grid container height="90vh">
+                        <Routes>
+                            <Route path="/account" element={<><SignUpInPage/><AuthTitleBox/></>}/>
+                            <Route path="/password_reset" element={<><EmailEnterPage/><PasswordTitleBox/></>}/>
+                        </Routes>
+                    </Grid>
+                </Box>
+            </MainLayout>
         </Router>
     );
-}
+};
 
 export default App;
