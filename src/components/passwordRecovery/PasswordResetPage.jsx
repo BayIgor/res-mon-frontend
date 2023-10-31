@@ -9,38 +9,42 @@ import React, {useEffect, useState} from "react";
 import CustomInput from "../auth/CustomInput";
 import AuthService from "../../services/AuthService";
 
-const EmailEnterPage = () => {
+const PasswordResetPage = () => {
 
     useEffect(() => {
         document.title = 'Сброс пароля';
     }, []);
 
-    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [isSuccessEmail, setSuccessEmail] = useState(false);
+    const [isSuccessReset, setSuccessReset] = useState(false);
 
-    const handleEmailChange = (e) => {
+    const handlePasswordChange = (e) => {
         const value = e.target.value;
-        setEmail(value);
+        setPassword(value);
 
         if (value.trim() === '') {
             setError('Поле не может быть пустым');
-        } else if (!value.includes("@") || !value.includes(".")) {
-            setError("Неверная почта")
         } else {
             setError('');
         }
     };
 
-    const recoveryPassword = async () => {
-        const response = await AuthService.forgotPassword({email});
-        if (!(response.data === "Сообщение на почту успешно отправлено")) {
-            setError(response.data);
+    const resetpass = async () => {
+        const url = new URL(window.location.href);
+        const searchParams = new URLSearchParams(url.search);
+
+        const jwt = searchParams.get("jwt");
+
+        const response = await AuthService.passwordReset({jwt, password});
+
+        if(response.data === "Пароль успешно изменён"){
+            setSuccessReset(true);
         }
         else {
-            setSuccessEmail(true);
+            setError(response.data)
         }
-    };
+    }
 
     return (
         <Grid
@@ -50,17 +54,8 @@ const EmailEnterPage = () => {
             lg={6}
             xl={6}
             minHeight={550}
-            sx={{
-                boxShadow: {
-                    xs: "",
-                    sm: "",
-                    md: "15px 2px 5px -5px",
-                    lg: "15px 2px 5px -5px",
-                    xl: "15px 2px 5px -5px",
-                },
-            }}
         >
-            {!isSuccessEmail?<Box
+            {isSuccessReset?<Box
                 sx={{
                     backgroundColor: "rgba(0, 24, 57, 0.2)",
                     display: "flex",
@@ -68,28 +63,21 @@ const EmailEnterPage = () => {
                     alignItems: "center",
                     height: "100%",
                     borderRadius: {
-                        xs: "30px",
-                        sm: "30px",
-                        md: "30px 0 0 30px",
-                        lg: "30px 0 0 30px",
-                        xl: "30px 0 0 30px",
+                        xs: "30px 30px 30px 30px",
+                        sm: "30px 30px 30px 30px",
+                        md: "30px 30px 30px 30px",
+                        lg: "30px 30px 30px 30px",
+                        xl: "30px 30px 30px 30px",
                     },
                 }}
             >
-                <Typography
-                    color="white"
-                    fontWeight="bold"
-                    sx={{textAlign: "center", marginTop: 20, marginBottom: 5}}
-                >
-                    Введите почту своего аккаунта
-                </Typography>
-                <Box width="50%">
+                <Box width="50%" mt={30}>
                     <CustomInput
-                        label="Почта"
-                        placeholder="Введите вашу почту..."
-                        isIconActive={false}
-                        value={email}
-                        onChange={handleEmailChange}
+                        label="Пароль"
+                        placeholder="Введите новый пароль..."
+                        isIconActive={true}
+                        value={password}
+                        onChange={handlePasswordChange}
                     />
                     <Box
                         display="flex"
@@ -100,10 +88,10 @@ const EmailEnterPage = () => {
                         color="white"
                     >
                         <Button
-                            onClick={recoveryPassword}
+                            onClick={resetpass}
                             variant="contained"
                             fullWidth
-                            sx={{mt: 4, boxShadow: `0 0 20px ${colors.green[500]}`}}
+                            sx={{mt: 6, boxShadow: `0 0 20px ${colors.green[500]}`}}
                         >
                             Подтвердить
                         </Button>
@@ -133,13 +121,13 @@ const EmailEnterPage = () => {
                 <Typography
                     color="white"
                     fontWeight="bold"
-                    sx={{textAlign: "center", marginTop: 35, marginBottom: 5}}
+                    sx={{textAlign: "center", marginTop: 38, marginBottom: 5, marginLeft: 5, marginRight: 5}}
                 >
-                    Сообщение успешно отправлено, проверьте почту
+                    Пароль успешно изменён, теперь можете войти в аккаунт используя новый пароль
                 </Typography>
             </Box>}
         </Grid>
     );
 };
 
-export default EmailEnterPage;
+export default PasswordResetPage;

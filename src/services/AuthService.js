@@ -25,8 +25,12 @@ const AuthService = {
         }
     },
 
-    passwordReset: (forgotRequest)=>{
+    forgotPassword: (forgotRequest)=>{
         return axios.post(BASE_URL + 'forgot_password', forgotRequest)
+    },
+
+    passwordReset: (resetRequest)=>{
+        return axios.post(BASE_URL + 'reset_password', resetRequest)
     }
 };
 

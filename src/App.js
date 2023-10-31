@@ -7,6 +7,8 @@ import MainLayout from "./layouts/MainLayout";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import EmailEnterPage from "./components/passwordRecovery/EmailEnterPage";
 import PasswordTitleBox from "./components/passwordRecovery/PasswordTitleBox";
+import PasswordResetPage from "./components/passwordRecovery/PasswordResetPage";
+import ResetTitleBox from "./components/passwordRecovery/ResetTitleBox";
 
 const App = () => {
     return (
@@ -26,7 +28,8 @@ const App = () => {
                     <Grid container height="90vh">
                         <Routes>
                             <Route path="/account" element={<><SignUpInPage/><AuthTitleBox/></>}/>
-                            <Route path="/password_reset" element={<><EmailEnterPage/><PasswordTitleBox/></>}/>
+                            <Route path="/forgot_password" element={<><EmailEnterPage/><PasswordTitleBox/></>}/>
+                            <Route path="/reset_password" element={<><PasswordResetPage/><ResetTitleBox/></>}/>
                         </Routes>
                     </Grid>
                 </Box>

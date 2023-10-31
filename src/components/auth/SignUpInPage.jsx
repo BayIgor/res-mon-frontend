@@ -45,7 +45,7 @@ const SignUpInPage = () => {
 
         if (value.trim() === '') {
             setError('Поле не может быть пустым');
-        } else if (!value.includes("@")&&!value.includes(".")) {
+        } else if (!value.includes("@") || !value.includes(".")) {
             setError("Неверная почта")
         } else {
             setError('');
@@ -250,7 +250,7 @@ const SignUpInPage = () => {
                             color="white"
                         >
                             <a
-                                href="#yoyo"
+                                href="http://localhost:3000/forgot_password"
                                 style={{
                                     color: colors.green[500],
                                     textDecoration: "none",
