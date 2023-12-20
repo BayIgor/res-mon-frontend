@@ -1,8 +1,9 @@
 import React from "react";
-import { ThemeProvider } from "@mui/material";
+import {Box, ThemeProvider} from "@mui/material";
 import { theme } from "../themes/Theme";
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
-const bgImage = require("../assets/bg.png");
+const bgImage = require("../assets/img_1.png");
 
 function MainLayout(props) {
     const { children } = props;
@@ -23,7 +24,21 @@ function MainLayout(props) {
                         alignItems: "center",
                     }}
                 >
-                    {children}
+                    <Box
+                        sx={{
+                            width: {
+                                sm: "90vw",
+                                xs: "90vw",
+                                md: "60vw",
+                                lg: "60vw",
+                                xl: "60vw",
+                            },
+                        }}
+                    >
+                        <Grid container height="90vh">
+                            {children}
+                        </Grid>
+                    </Box>
                 </div>
             </ThemeProvider>
         </div>

@@ -1,39 +1,29 @@
-import React from "react";
-import {Box} from "@mui/material";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import SignUpInPage from "./components/auth/SignUpInPage";
-import AuthTitleBox from "./components/auth/AuthTitleBox";
-import MainLayout from "./layouts/MainLayout";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import EmailEnterPage from "./components/passwordRecovery/EmailEnterPage";
-import PasswordTitleBox from "./components/passwordRecovery/PasswordTitleBox";
 import PasswordResetPage from "./components/passwordRecovery/PasswordResetPage";
-import ResetTitleBox from "./components/passwordRecovery/ResetTitleBox";
+import Dashboard from "./scenes/dashboard/dashboard";
+import MainBar from "./scenes/global/MainBar";
+import Measurements from "./scenes/mesurements/measurements";
+import Meters from "./scenes/meters/meters";
+import Archive from "./scenes/archive/archive";
+import FAQ from "./scenes/faq/faq";
+
+
 
 const App = () => {
     return (
         <Router>
-            <MainLayout>
-                <Box
-                    sx={{
-                        width: {
-                            sm: "90vw",
-                            xs: "90vw",
-                            md: "60vw",
-                            lg: "60vw",
-                            xl: "60vw",
-                        },
-                    }}
-                >
-                    <Grid container height="90vh">
-                        <Routes>
-                            <Route path="/account" element={<><SignUpInPage/><AuthTitleBox/></>}/>
-                            <Route path="/forgot_password" element={<><EmailEnterPage/><PasswordTitleBox/></>}/>
-                            <Route path="/reset_password" element={<><PasswordResetPage/><ResetTitleBox/></>}/>
-                        </Routes>
-                    </Grid>
-                </Box>
-            </MainLayout>
+            <Routes>
+                <Route path="/account" element={<><SignUpInPage/></>}/>
+                <Route path="/forgot_password" element={<><EmailEnterPage/></>}/>
+                <Route path="/reset_password" element={<><PasswordResetPage/></>}/>
+                <Route path="/main" element={<><MainBar contentComponent={<Dashboard/>}/></>}/>
+                <Route path="/meters" element={<><MainBar contentComponent={<Meters/>}/></>}/>
+                <Route path="/measurements" element={<><MainBar contentComponent={<Measurements/>}/></>}/>
+                <Route path="/archive" element={<><MainBar contentComponent={<Archive/>}/></>}/>
+                <Route path="/faq" element={<><MainBar contentComponent={<FAQ/>}/></>}/>
+            </Routes>
         </Router>
     );
 };

@@ -1,6 +1,9 @@
 import { createTheme } from "@mui/material";
 
 export const colors = {
+    purple: {
+      100: "rgba(140, 124, 244, 0.8)"
+    },
     green: {
         100: "#d5f5e0",
         200: "#abebc1",
@@ -51,10 +54,10 @@ export const theme = createTheme({
     palette: {
         mode: "dark",
         primary: {
-            main: colors.green[500],
+            main: colors.purple[100],
         },
         background: {
-            default: "#1f1d2c",
+            default: "rgba(140, 124, 244, 0.8)",
         },
     },
     typography: {

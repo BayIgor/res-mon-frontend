@@ -6,7 +6,7 @@ const AuthTitleBox = () => {
         <Grid xs={0} sm={0} md={6} lg={6} xl={6} minHeight={550}>
             <Box
                 sx={{
-                    background: 'linear-gradient(135deg, rgba(0, 255, 60, 0.3) , rgba(0, 157, 255, 0.3))',
+                    background: 'linear-gradient(135deg, rgba(140, 124, 244, 0.8) , rgba(112, 104, 243, 0.8))',
                     padding: "20px",
                     display: {
                         xs: 'none',

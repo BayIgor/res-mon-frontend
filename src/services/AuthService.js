@@ -12,13 +12,13 @@ const AuthService = {
         return axios.post(BASE_URL + 'signup', signupRequest);
     },
 
-    hello: () => {
+    checkAuth: () => {
         const jwtToken = localStorage.getItem('jwt');
         if (jwtToken) {
             const headers = {
                 Authorization: `Bearer ${jwtToken}`,
             };
-            return axios.get(BASE_URL + 'api/hello', { headers });
+            return axios.get(BASE_URL + 'api/checkAuth', { headers });
         } else {
             console.log('JWT token not found in Local Storage');
             return Promise.reject('JWT token not found');
